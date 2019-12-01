@@ -1,0 +1,28 @@
+{
+  "name": "advent-of-code-2019",
+  "version": "1.0.0",
+  "description": "Advent of Code 2019",
+  "private": true,
+  "scripts": {
+    "tsc:init": "tsc --init"
+  },
+  "engines": {
+    "node": "13.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balintsoos/advent-of-code-2019.git"
+  },
+  "author": "Balint Soos <soosbalint95@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/balintsoos/advent-of-code-2019/issues"
+  },
+  "homepage": "https://github.com/balintsoos/advent-of-code-2019#readme",
+  "devDependencies": {
+    "prettier": "1.19.1"
+  },
+  "dependencies": {
+    "typescript": "3.7.2"
+  }
+}
