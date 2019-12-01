@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Advent of Code 2019",
   "private": true,
+  "main": "./src/index.ts",
   "scripts": {
-    "tsc:init": "tsc --init"
+    "start": "ts-node src/index.ts"
   },
   "engines": {
     "node": "13.2.0"
@@ -20,9 +21,12 @@
   },
   "homepage": "https://github.com/balintsoos/advent-of-code-2019#readme",
   "devDependencies": {
-    "prettier": "1.19.1"
+    "@types/node": "12.12.14",
+    "prettier": "1.19.1",
+    "typescript": "3.7.2"
   },
   "dependencies": {
-    "typescript": "3.7.2"
+    "rxjs": "6.5.3",
+    "ts-node": "8.5.4"
   }
 }
