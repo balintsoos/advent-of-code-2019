@@ -25,7 +25,8 @@ describe('Day 2 Part 1', () => {
       },
     ].forEach(testCase => {
       it('should calculate result array', () => {
-        expect(processInput(testCase.input)).toEqual(testCase.expected);
+        processInput(testCase.input)
+        expect(testCase.input).toEqual(testCase.expected);
       });
     });
   });

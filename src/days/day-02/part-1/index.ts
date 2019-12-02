@@ -6,28 +6,30 @@ export const readInput = (filePath: string): number[] => {
   return file.split(',').map(item => parseInt(item));
 };
 
-export const processItem = (input: number[], index: number, callback: (a: number, b: number) => number): number[] => {
-  const addLeftIndex = input[index + 1];
-  const addRightIndex = input[index + 2];
-  const result = callback(input[addLeftIndex], input[addRightIndex]);
+export const processInstruction = (
+  input: number[],
+  index: number,
+  operate: (leftOperand: number, rightOperand: number) => number,
+): void => {
+  const leftOperandIndex = input[index + 1];
+  const rightOperandIndex = input[index + 2];
+  const result = operate(input[leftOperandIndex], input[rightOperandIndex]);
   const resultIndex = input[index + 3];
   input[resultIndex] = result;
-  return input;
 };
 
-export const processInput = (input: number[]) => {
+export const processInput = (input: number[]): void => {
   let index = 0;
   while (index < input.length) {
     if (input[index] === 1) {
-      input = processItem(input, index, (a, b) => a + b);
+      processInstruction(input, index, (a, b) => a + b);
     } else if (input[index] === 2) {
-      input = processItem(input, index, (a, b) => a * b);
+      processInstruction(input, index, (a, b) => a * b);
     } else {
       break;
     }
     index += 4;
   }
-  return input;
 };
 
 export default () => {
@@ -36,6 +38,6 @@ export default () => {
   input[1] = 12;
   input[2] = 2;
 
-  const result = processInput(input);
-  console.log(result[0]);
+  processInput(input);
+  console.log(input[0]);
 };
