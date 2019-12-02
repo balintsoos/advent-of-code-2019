@@ -1,10 +1,8 @@
-import { inputObservable } from '../../../libs/input-observable';
+import { inputObservable } from '../lib/input-observable';
 import { join } from 'path';
-import { map, reduce } from 'rxjs/operators';
-
-export const calculateFuel = (mass: number): number => Math.floor(mass / 3) - 2;
-export const add = (acc: number, value: number): number => acc + value;
-export const sum = reduce(add, 0);
+import { map } from 'rxjs/operators';
+import { calculateFuel } from '../lib/calculate-fuel';
+import { sum } from '../lib/sum-operator';
 
 export default () =>
   inputObservable(join(__dirname, '../input.txt'))

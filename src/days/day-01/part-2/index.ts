@@ -1,7 +1,8 @@
-import { inputObservable } from '../../../libs/input-observable';
+import { inputObservable } from '../lib/input-observable';
 import { join } from 'path';
 import { map } from 'rxjs/operators';
-import { calculateFuel, sum } from '../part-1';
+import { calculateFuel } from '../lib/calculate-fuel';
+import { sum } from '../lib/sum-operator';
 
 const calculateTotalFuel = (mass: number): number => {
   const fuel = calculateFuel(mass);
