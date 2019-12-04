@@ -1,20 +1,25 @@
-import { aperture, difference, allPass } from 'ramda';
+import { aperture, difference, allPass, pipe, filter, map } from 'ramda';
 import { getDigits, isSorted } from '../part-1';
 
-export const hasExactlyOneDoubleDigits = (password: number): boolean => {
-  const digits = getDigits(password);
-  const doubleDigits = aperture(2, digits)
-    .filter(([digitA, digitB]) => digitA === digitB)
-    .map(([digit]) => digit);
+export const getDoubleDigits = pipe(
+  getDigits,
+  aperture(2),
+  filter(([digitA, digitB]) => digitA === digitB),
+  map(([digit]) => digit),
+);
 
-  const tripleDigits = aperture(3, digits)
-    .filter(([digitA, digitB, digitC]) => digitA === digitB && digitB === digitC)
-    .map(([digit]) => digit);
+export const getTripleDigits = pipe(
+  getDigits,
+  aperture(3),
+  filter(([digitA, digitB, digitC]) => digitA === digitB && digitB === digitC),
+  map(([digit]) => digit),
+);
 
-  return !!difference(doubleDigits, tripleDigits).length;
+export const hasExactlyDoubleDigits = (password: number): boolean => {
+  return !!difference(getDoubleDigits(password), getTripleDigits(password)).length;
 };
 
-export const isValidPassword = allPass([isSorted, hasExactlyOneDoubleDigits]);
+export const isValidPassword = allPass([isSorted, hasExactlyDoubleDigits]);
 
 export const generatePasswords = (lowest: number, highest: number): number[] => {
   const passwords: number[] = [];
