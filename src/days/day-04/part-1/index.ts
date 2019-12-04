@@ -1,15 +1,23 @@
-import { aperture, any, all } from 'ramda';
+import { aperture, any, all, allPass } from 'ramda';
 
-export const isValidPassword = (password: number): boolean => {
-  const digits = password
+export const getDigits = (password: number): number[] => {
+  return password
     .toString()
     .split('')
     .map(digit => parseInt(digit));
-  const digitPairs = aperture(2, digits);
-  const hasTwoSameDigits = any(([digitA, digitB]) => digitA === digitB, digitPairs);
-  const isSorted = all(([digitA, digitB]) => digitA <= digitB, digitPairs);
-  return hasTwoSameDigits && isSorted;
 };
+
+export const isSorted = (password: number): boolean => {
+  const digitPairs = aperture(2, getDigits(password));
+  return all(([digitA, digitB]) => digitA <= digitB, digitPairs);
+};
+
+export const hasDoubleDigits = (password: number): boolean => {
+  const digitPairs = aperture(2, getDigits(password));
+  return any(([digitA, digitB]) => digitA === digitB, digitPairs);
+};
+
+export const isValidPassword = allPass([isSorted, hasDoubleDigits]);
 
 export const generatePasswords = (lowest: number, highest: number): number[] => {
   const passwords: number[] = [];
