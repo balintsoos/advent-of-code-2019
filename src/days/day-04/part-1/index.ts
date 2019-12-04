@@ -1,21 +1,22 @@
-import { aperture, any, all, allPass } from 'ramda';
+import { aperture, any, all, allPass, pipe, toString, split, map } from 'ramda';
 
-export const getDigits = (password: number): number[] => {
-  return password
-    .toString()
-    .split('')
-    .map(digit => parseInt(digit));
-};
+export const getDigits = pipe(
+  toString,
+  split(''),
+  map(digit => parseInt(digit)),
+);
 
-export const isSorted = (password: number): boolean => {
-  const digitPairs = aperture(2, getDigits(password));
-  return all(([digitA, digitB]) => digitA <= digitB, digitPairs);
-};
+export const isSorted = pipe(
+  getDigits,
+  aperture(2),
+  all(([digitA, digitB]) => digitA <= digitB),
+);
 
-export const hasDoubleDigits = (password: number): boolean => {
-  const digitPairs = aperture(2, getDigits(password));
-  return any(([digitA, digitB]) => digitA === digitB, digitPairs);
-};
+export const hasDoubleDigits = pipe(
+  getDigits,
+  aperture(2),
+  any(([digitA, digitB]) => digitA === digitB),
+);
 
 export const isValidPassword = allPass([isSorted, hasDoubleDigits]);
 
