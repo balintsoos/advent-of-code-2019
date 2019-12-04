@@ -24,10 +24,10 @@ export const newCoord = (currentCoord: Coordinate, direction: string): Coordinat
       return { posX: currentCoord.posX, posY: currentCoord.posY - 1 };
 
     case 'L':
-      return { posX: currentCoord.posX + 1, posY: currentCoord.posY };
+      return { posX: currentCoord.posX - 1, posY: currentCoord.posY };
 
     case 'R':
-      return { posX: currentCoord.posX - 1, posY: currentCoord.posY };
+      return { posX: currentCoord.posX + 1, posY: currentCoord.posY };
 
     default:
       return currentCoord;
@@ -38,7 +38,7 @@ export const buildCoords = (instructions: string[], origo: Coordinate): Coordina
   const coords: Coordinate[] = [];
   instructions.forEach((instruction: string) => {
     const direction = instruction[0];
-    const stepCount = parseInt(instruction[1]);
+    const stepCount = parseInt(instruction.slice(1));
     for (let step = 0; step < stepCount; step++) {
       const currentCord = last(coords) ?? origo;
       coords.push(newCoord(currentCord, direction));
