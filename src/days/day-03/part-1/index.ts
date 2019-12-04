@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { last, intersection, min } from 'ramda';
+import { last, min } from 'ramda';
 
 export type Coordinate = {
   posX: number;
@@ -50,6 +50,9 @@ export const buildCoords = (instructions: string[], origo: Coordinate): Coordina
 export const distance = (coordA: Coordinate, coordB: Coordinate): number => {
   return Math.abs(coordA.posX - coordB.posX) + Math.abs(coordA.posY - coordB.posY);
 };
+
+export const intersection = (listA: Coordinate[], listB: Coordinate[]): Coordinate[] =>
+  listA.filter(coordA => !!listB.find(coordB => coordA.posX === coordB.posX && coordA.posY === coordB.posY));
 
 export const processLines = (lines: string[][]): number => {
   return intersection(buildCoords(lines[0], ORIGO), buildCoords(lines[1], ORIGO))
